@@ -7,6 +7,20 @@ jobs:
       - name: Pull image
         run: docker pull debian:sid-slim
         
+      - name: Set up Snyk CLI
+        uses: snyk/actions/node@master
+        with:
+          command: ''
+          
+      - name: Snyk container test
+        run: 
+            snyk container test debian:sid-slim
+            EXIT_CODE=$?
+            echo $EXIT_CODE
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          
       - name: Container Test
         uses: snyk/actions/node@master
         continue-on-error: true
@@ -22,7 +36,3 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: container monitor debian:sid-slim
-        run:     
-            EXIT_CODE=$?
-            echo "Exit code was $EXIT_CODE"
-
