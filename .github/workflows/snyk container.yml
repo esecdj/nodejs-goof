@@ -7,7 +7,7 @@ jobs:
       - name: Pull image
         run: docker pull debian:sid-slim
         
-      - name: Container
+      - name: Container Test
         uses: snyk/actions/node@master
         continue-on-error: true
         env:
@@ -15,5 +15,10 @@ jobs:
         with:
           command: container test debian:sid-slim
           
-      - name: check
-        run: ls
+      - name: Container Monitor
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: container monitor debian:sid-slim
