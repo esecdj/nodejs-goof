@@ -1,0 +1,14 @@
+name: "snyk container"
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull image
+        run: docker pull debian:sid-slim
+        
+      - name: Snyk Container
+        run: snyk container test debian:sid-slim --org=${{ secrets.SNYK_ORG }} 
+        continue-on-error: true
+        env:
+           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
