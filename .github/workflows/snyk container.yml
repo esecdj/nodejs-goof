@@ -7,8 +7,9 @@ jobs:
       - name: Pull image
         run: docker pull debian:sid-slim
         
-      - name: Snyk Container
-        run: snyk container test debian:sid-slim --org=${{ secrets.SNYK_ORG }} 
+      - name: Container
+        uses: snyk/actions/node@master
         continue-on-error: true
         env:
-           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          command: container test debian:sid-slim
