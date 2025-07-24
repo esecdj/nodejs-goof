@@ -13,7 +13,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          run_command: 
+          command: 
                  container test debian:sid-slim --severity-threshold=high
                  echo "test"
                  
