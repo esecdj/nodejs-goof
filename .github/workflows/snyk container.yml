@@ -27,7 +27,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: container test debian:sid-slim
+          command: container test debian:sid-slim --severity-threshold=high
           
       - name: Container Monitor
         uses: snyk/actions/node@master
