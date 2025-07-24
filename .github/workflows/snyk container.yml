@@ -10,12 +10,13 @@ jobs:
         run: docker pull debian:sid-slim
         
       - name: Container Test
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: 
-                 container test debian:sid-slim --severity-threshold=high
+        run: snyk test
+    #    continue-on-error: true
+    #    env:
+    #      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    #    with:
+    #      command: 
+    #             container test debian:sid-slim --severity-threshold=high
                  
       - name: Container Monitor
         uses: snyk/actions/node@master
