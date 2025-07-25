@@ -6,16 +6,18 @@ jobs:
     steps:
       - uses: snyk/actions/setup@master
         id: snyk
+        
       - name: Pull image
         run: docker pull debian:sid-slim
         
       - name: Container Test
-        run: |
-             snyk container test debian:sid-slim
-             echo $?
+        run: snyk container test debian:sid-slim
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Exit Code
+        run: echo $?
                  
       - name: Container Monitor
         uses: snyk/actions/node@master
