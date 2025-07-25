@@ -37,7 +37,7 @@ jobs:
         run: | 
           echo "$RESULT"
           echo "$GITHUB_OUTPUT"
-          echo "${{ steps.container.outputs.RESULT }]"
+          echo "${{ steps.container.outputs.RESULT }}"
           
       - name: Container Monitor
         uses: snyk/actions/node@master
