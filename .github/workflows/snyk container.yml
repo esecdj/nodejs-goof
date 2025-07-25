@@ -4,19 +4,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: snyk/actions/node@master
-      
+      - uses: snyk/actions/setup@master
+        id: snyk
       - name: Pull image
         run: docker pull debian:sid-slim
         
       - name: Container Test
-        run: snyk test
-    #    continue-on-error: true
-    #    env:
-    #      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-    #    with:
-    #      command: 
-    #             container test debian:sid-slim --severity-threshold=high
+        run: snyk container test debian:sid-slim
                  
       - name: Container Monitor
         uses: snyk/actions/node@master
