@@ -22,19 +22,23 @@ jobs:
  #       env:
  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Container
+        id: container
         continue-on-error: true
         run: | 
           set +e
           snyk container test debian:sid-slim
           RESULT="$?"
-          echo "$RESULT"
+          echo "$RESULT" >> $GITHUB_OUTPUT
  #         exit $RESULT
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
           
       - name: ECHO
-        run: echo "$RESULT"
-        
+        run: | 
+          echo "$RESULT"
+          echo "$GITHUB_OUTPUT"
+          echo "${{ steps.container.outputs.RESULT }]"
+          
       - name: Container Monitor
         uses: snyk/actions/node@master
         continue-on-error: true
