@@ -11,6 +11,8 @@ jobs:
         
       - name: Container Test
         run: snyk container test debian:sid-slim
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
                  
       - name: Container Monitor
         uses: snyk/actions/node@master
@@ -19,4 +21,3 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: container monitor debian:sid-slim
-
