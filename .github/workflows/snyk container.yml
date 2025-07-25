@@ -10,19 +10,27 @@ jobs:
       - name: Pull image
         run: docker pull debian:sid-slim
         
-      - name: Container Test
+#      - name: Container Test
+ #       continue-on-error: true
+ #       run: | 
+ #         set +e
+ #         snyk container test debian:sid-slim
+ #         exitcode="$?"
+ #         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+ #         exit "$exitcode"
+ #       env:
+ #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Container Test two
         continue-on-error: true
         run: | 
-          set +e
           snyk container test debian:sid-slim
-          exitcode="$?"
-          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-          exit "$exitcode"
+          RESULT=$?
+          exit $RESULT
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
           
       - name: ECHO
-        run: echo ${{ github.output }}
+        run: echo ${{ RESULT }}
         
       - name: Container Monitor
         uses: snyk/actions/node@master
