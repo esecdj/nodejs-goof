@@ -10,7 +10,8 @@ jobs:
         run: docker pull debian:sid-slim
         
       - name: Container Test
-        run: snyk container test debian:sid-slim
+        run: |
+             snyk container test debian:sid-slim
              echo $?
         continue-on-error: true
         env:
