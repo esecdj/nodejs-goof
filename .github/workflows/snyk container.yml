@@ -23,14 +23,15 @@ jobs:
       - name: Container Test two
         continue-on-error: true
         run: | 
+          set +e
           snyk container test debian:sid-slim
           RESULT=$?
           exit $RESULT
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
           
-      - name: ECHO
-        run: echo ${{ RESULT }}
+    #  - name: ECHO
+    #    run: echo ${{ RESULT }}
         
       - name: Container Monitor
         uses: snyk/actions/node@master
