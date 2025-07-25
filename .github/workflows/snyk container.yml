@@ -27,8 +27,6 @@ jobs:
         run: | 
           set +e
           snyk container test debian:sid-slim
-          EXITCODE="$?"
-          echo "$EXITCODE"
           echo "RESULT=$?" >> $GITHUB_OUTPUT
  #         exit $RESULT
         env:
@@ -36,8 +34,6 @@ jobs:
           
       - name: ECHO
         run: | 
-          echo "$RESULT"
-          echo "$GITHUB_OUTPUT"
           echo "${{ steps.container.outputs.RESULT }}"
           
       - name: Container Monitor
