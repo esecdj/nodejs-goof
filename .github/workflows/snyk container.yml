@@ -27,8 +27,9 @@ jobs:
         run: | 
           set +e
           snyk container test debian:sid-slim
-          RESULT="$?"
-          echo "$RESULT" >> $GITHUB_OUTPUT
+          EXITCODE="$?"
+          echo "$EXITCODE"
+          echo "RESULT=$?" >> $GITHUB_OUTPUT
  #         exit $RESULT
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
