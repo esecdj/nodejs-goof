@@ -11,10 +11,12 @@ jobs:
         run: docker pull debian:sid-slim
         
       - name: Container Test
-        run: | 
-          snyk container test debian:sid-slim
-          echo "hello"
         continue-on-error: true
+        run: | 
+          set +e
+          snyk container test debian:sid-slim
+          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          echo ${{ github.output }}
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
                  
