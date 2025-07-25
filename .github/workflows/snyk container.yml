@@ -17,7 +17,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Exit Code
-        run: echo $?
+        run: echo hello
                  
       - name: Container Monitor
         uses: snyk/actions/node@master
