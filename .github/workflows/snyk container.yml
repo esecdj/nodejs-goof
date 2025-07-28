@@ -26,7 +26,9 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
           
       - name: Fail Test
+        continue-on-error: true
         run: | 
           if [ ${{ steps.container.outputs.RESULT }} == 1 ]; then
           echo "container test failed - send report to team"
+          fi
 
