@@ -33,6 +33,7 @@ jobs:
           fi
           
       - name: Container Monitor
+        continue-on-error: true
         run: | 
           if [ ${{ steps.container.outputs.RESULT }} == 0 ]; then
           echo "container test passed - send to snyk and upload to registry"      
