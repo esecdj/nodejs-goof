@@ -7,20 +7,21 @@ jobs:
       - uses: snyk/actions/setup@master
         id: snyk
 
-      - uses: docker/login-action@v3.4.0
-        id: docker
-        with:
-          registry: trialkxioiz.jfrog.io/snyktest-docker-local
-          username: dakshita.joshi@esecforte.com
-          password: cmVmdGtuOjAxOjE3ODQ3MTYyNTI6UktDQWZ1N0JhZ3ZmMnFqakRDTGRtVEluSnlk
+#      - uses: docker/login-action@v3.4.0
+#        id: docker
+#        with:
+#          registry: trialkxioiz.jfrog.io/snyktest-docker-local
+#          username: dakshita.joshi@esecforte.com
+#          password: cmVmdGtuOjAxOjE3ODQ3MTYyNTI6UktDQWZ1N0JhZ3ZmMnFqakRDTGRtVEluSnlk
+#          docker pull trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim
               
       - name: Container test
         id: container
         continue-on-error: true
         run: | 
           set +e
-          docker pull trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim
-          snyk container test trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim --severity-threshold=critical
+          docker pull debian:oldstable-20170606
+          snyk container test debian:oldstable-20170606 --severity-threshold=critical
           echo "RESULT=$?" >> $GITHUB_OUTPUT
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
@@ -37,7 +38,7 @@ jobs:
         run: | 
           if [ ${{ steps.container.outputs.RESULT }} == 0 ]; then
           echo "container test passed - send to snyk and upload to registry"      
-          snyk container monitor trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim
+          snyk container monitor debian:oldstable-20170606
           fi
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
