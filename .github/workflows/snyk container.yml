@@ -8,6 +8,11 @@ jobs:
       - uses: snyk/actions/setup@master
         id: snyk
         
+      - name: Pull Image
+        run: | 
+          docker login  trialkxioiz.jfrog.io/snyktest-docker-local -u dakshita.joshi@esecforte.com -p cmVmdGtuOjAxOjE3ODQ3MTYyNTI6UktDQWZ1N0JhZ3ZmMnFqakRDTGRtVEluSnlk
+          
+        
       - name: Container test
         id: container
         continue-on-error: true
