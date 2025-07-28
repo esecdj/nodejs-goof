@@ -30,7 +30,7 @@ jobs:
           if [ ${{ steps.container.outputs.RESULT }} == 0 ]; then
           echo "container test passed - send to snyk and upload to registry"      
           
-      - name: Container test
+      - name: Container Monitor
         run: | 
           snyk container monitor debian:dj-slim
         env:
