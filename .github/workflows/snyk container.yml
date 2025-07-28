@@ -31,4 +31,13 @@ jobs:
           if [ ${{ steps.container.outputs.RESULT }} == 1 ]; then
           echo "container test failed - send report to team"
           fi
+          
+      - name: Container Monitor
+        run: | 
+          if [ ${{ steps.container.outputs.RESULT }} == 0 ]; then
+          echo "container test passed - send to snyk and upload to registry"      
+          snyk container monitor trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim
+          fi
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
