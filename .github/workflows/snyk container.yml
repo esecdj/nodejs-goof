@@ -19,7 +19,7 @@ jobs:
         continue-on-error: true
         run: | 
           set +e
-          docker pull debian:dj-slim
+          docker pull trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim
           snyk container test debian:dj-slim --severity-threshold=critical
           echo "RESULT=$?" >> $GITHUB_OUTPUT
         env:
