@@ -20,7 +20,7 @@ jobs:
         run: | 
           set +e
           docker pull trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim
-          snyk container test debian:dj-slim --severity-threshold=critical
+          snyk container test trialkxioiz.jfrog.io/snyktest-docker-local/debian:dj-slim --severity-threshold=critical
           echo "RESULT=$?" >> $GITHUB_OUTPUT
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
