@@ -4,21 +4,23 @@ jobs:
   SNYK:
     runs-on: ubuntu-latest    
     steps:
+    
       - name: Download Snyk
       - uses: snyk/actions/setup@master
         id: snyk
-        
-      - name: Pull Image
-        run: | 
-          docker login  trialkxioiz.jfrog.io/snyktest-docker-local -u dakshita.joshi@esecforte.com -p cmVmdGtuOjAxOjE3ODQ3MTYyNTI6UktDQWZ1N0JhZ3ZmMnFqakRDTGRtVEluSnlk
-          
-        
+
+      - name: Download Docker
+      - uses: docker/login-action@v3.4.0
+        with:
+          registry: trialkxioiz.jfrog.io/snyktest-docker-local
+          username: dakshita.joshi@esecforte.com
+          password: cmVmdGtuOjAxOjE3ODQ3MTYyNTI6UktDQWZ1N0JhZ3ZmMnFqakRDTGRtVEluSnlk
+              
       - name: Container test
         id: container
         continue-on-error: true
         run: | 
           set +e
-          docker login  trialkxioiz.jfrog.io/snyktest-docker-local -u dakshita.joshi@esecforte.com -p cmVmdGtuOjAxOjE3ODQ3MTYyNTI6UktDQWZ1N0JhZ3ZmMnFqakRDTGRtVEluSnlk
           docker pull debian:dj-slim
           snyk container test debian:dj-slim --severity-threshold=critical
           echo "RESULT=$?" >> $GITHUB_OUTPUT
