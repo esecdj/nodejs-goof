@@ -2,7 +2,8 @@
 // is able to navigate to cross-file paths in the vuln description 
 /** 
 module.exports.adminLoginSuccess = function(redirectPage, res) {
-    console.log({redirectPage})
+    console.log({redirectPage})random commit
+    //
     if (redirectPage) {
         return res.redirect(redirectPage)
     } else {
