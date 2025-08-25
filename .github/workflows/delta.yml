@@ -3,9 +3,13 @@ on: [push, pull_request]
 jobs:
   SNYK:
     runs-on: ubuntu-latest    
+    
     steps:
       - uses: snyk/actions/setup@master
         id: snyk
+        
+      - name: Checkout
+        uses: actions/checkout@v5
 
       - name: NPM Install
         continue-on-error: true
