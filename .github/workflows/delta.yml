@@ -17,7 +17,7 @@ jobs:
           npm install
           
       - name: Delta Setup
-        id: delta
+        id: snyk-delta
         continue-on-error: true
         run: | 
           npm i -g snyk-delta
@@ -27,7 +27,7 @@ jobs:
       - name: Snyk Baseline test
         continue-on-error: true
         run: | 
-          snyk test --json | snyk delta --setPassIfNoBaseline true --fail-on all
+          snyk test --json | snyk-delta --setPassIfNoBaseline true --fail-on all
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
           
