@@ -10,11 +10,6 @@ jobs:
         
       - name: Checkout
         uses: actions/checkout@v5
-
-      - name: NPM Install
-        continue-on-error: true
-        run: | 
-          npm install
           
       - name: Delta Setup
         id: snyk-delta
@@ -27,6 +22,7 @@ jobs:
       - name: Snyk Baseline test
         continue-on-error: true
         run: | 
+          npm install
           snyk test --json | snyk-delta --setPassIfNoBaseline true --fail-on all
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
