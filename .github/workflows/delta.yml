@@ -13,7 +13,7 @@ jobs:
           npm install
           
       - name: Delta Setup
-        id: snyk delta
+        id: delta
         continue-on-error: true
         run: | 
           npm i -g snyk-delta
