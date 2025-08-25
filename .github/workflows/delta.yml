@@ -1,0 +1,37 @@
+name: "snyk container"
+on: [push, pull_request]
+jobs:
+  SNYK:
+    runs-on: ubuntu-latest    
+    steps:
+      - uses: snyk/actions/setup@master
+        id: snyk
+
+      - name: NPM Install
+        continue-on-error: true
+        run: | 
+          npm install
+          
+      - name: Delta Setup
+        id: snyk delta
+        continue-on-error: true
+        run: | 
+          npm i -g snyk-delta
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  
+                    
+      - name: Snyk Baseline test
+        continue-on-error: true
+        run: | 
+          snyk test --json | snyk delta --setPassIfNoBaseline true --fail-on all
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}         
+          
+      - name: Snyk Monitor
+        continue-on-error: true
+        run: |      
+          snyk monitor 
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+          
