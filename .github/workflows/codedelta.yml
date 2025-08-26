@@ -35,7 +35,7 @@ jobs:
          path: ${{ github.workspace }}/snyk_code_baseline.json
 
     # Checkout PR branch
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     - name: Authenticate Snyk
       run: snyk auth ${SNYK_TOKEN}
 
@@ -57,5 +57,6 @@ jobs:
 
     - name: Check if new issues have been introduced via the PR
       run: |
+        ls
         chmod +x "${{ github.workspace }}/.github/snyk-pr-diff-amd64-linux"
         ${{ github.workspace }}/.github/snyk-pr-diff-amd64-linux code ${{ github.workspace }}/snyk_code_baseline.json ${{ github.workspace }}/snyk_code_pr.json
