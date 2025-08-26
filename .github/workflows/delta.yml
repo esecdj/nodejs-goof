@@ -37,7 +37,7 @@ jobs:
       - name: Snyk Monitor
         continue-on-error: true
         run: |      
-          snyk monitor 
+          snyk monitor --project-name=nodejs-goof
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
