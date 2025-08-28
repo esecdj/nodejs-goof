@@ -29,4 +29,6 @@ jobs:
          
     - name: Run Snyk Import
       run: |
+         pwd
+         cat import-projects.json
          DEBUG=snyk* snyk-api-import import --file=import-projects.json
