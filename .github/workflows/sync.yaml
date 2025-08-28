@@ -15,7 +15,7 @@ jobs:
 
     - name: Download Snyk Import
       run: |
-         wget -Oq snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
+         wget -q -O snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
          chmod a+x ./snyk-api-import
          ls
     - name: Run Snyk Import
