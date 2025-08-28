@@ -17,7 +17,8 @@ jobs:
       run: |
          wget -q -O snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
          chmod a+x ./snyk-api-import
-         ls
+         mv ./snyk /usr/local/bin/
+         
     - name: Run Snyk Import
       run: |
          DEBUG=snyk* snyk-api-import import --file=targets.json
