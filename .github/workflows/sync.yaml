@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: download api import
     env:
-      SNYK_TOKEN_API: ${{ secrets.SNYK_TOKEN_API }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       CONCURRENT_IMPORTS: ${{ secrets.CONCURRENT_IMPORTS }}
       SNYK_LOG_PATH: ${{ secrets.SNYK_LOG_PATH }}
     steps:
