@@ -10,12 +10,13 @@ jobs:
     name: download api import
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      CONCURRENT_IMPORTS: ${{ secrets.CONCURRENT_IMPORTS }}
     steps:
 
     - name: Download Snyk Import
       run: |
-         wget -O snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
-         chmod a+x ./snyk
+         wget -Oq snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
+         chmod a+x ./snyk-api-import
          ls
     - name: Run Snyk Import
       run: |
