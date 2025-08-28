@@ -11,6 +11,7 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       CONCURRENT_IMPORTS: ${{ secrets.CONCURRENT_IMPORTS }}
+      SNYK_LOG_PATH: ${{ secrets.SNYK_LOG_PATH }}
     steps:
 
     - name: Download Snyk Import
