@@ -1,0 +1,29 @@
+name: import sync
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  sync-import:
+    runs-on: ubuntu-latest
+    name: download api import
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    steps:
+    # Checkout base ref branch
+    - uses: actions/checkout@v5
+      with:
+        ref: ${{ github.base_ref }}
+    - name: Download Snyk Import
+      run: |
+         wget -O snyk https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
+         chmod +x ./snyk
+         ls
+
+    - name: Check if new issues have been introduced via the PR
+      run: |
+        cd "${{ github.workspace }}/.git"
+        ls -a
+        chmod +x "${{ github.workspace }}/.github/snyk-pr-diff-amd64-linux"
+        ${{ github.workspace }}/.github/snyk-pr-diff-amd64-linux code ${{ github.workspace }}/snyk_code_baseline.json ${{ github.workspace }}/snyk_code_pr.json
