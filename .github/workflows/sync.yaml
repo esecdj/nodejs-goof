@@ -29,4 +29,4 @@ jobs:
          
     - name: Run Snyk Import
       run: |
-         DEBUG=snyk* snyk-api-import import --file=targets.json
+         DEBUG=snyk* snyk-api-import import --file=import-projects.json
