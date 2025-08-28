@@ -13,7 +13,12 @@ jobs:
       CONCURRENT_IMPORTS: ${{ secrets.CONCURRENT_IMPORTS }}
       SNYK_LOG_PATH: ${{ secrets.SNYK_LOG_PATH }}
     steps:
-
+    
+    - name: Checkout
+      uses: actions/checkout@v5
+      with:
+          ref: main
+          
     - name: Download Snyk Import
       run: |
          wget -q -O snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
