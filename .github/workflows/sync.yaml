@@ -20,7 +20,7 @@ jobs:
          chmod a+x ./snyk-api-import
          mv ./snyk-api-import /usr/local/bin/
          mkdir -p /var/log/snyk
-         chmod -R 755 /var/log/snyk
+         chmod -R 777 /var/log/snyk
          
     - name: Run Snyk Import
       run: |
