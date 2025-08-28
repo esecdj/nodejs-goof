@@ -19,8 +19,8 @@ jobs:
          wget -q -O snyk-api-import https://github.com/snyk/snyk-api-import/releases/download/v2.21.6/snyk-api-import-linux
          chmod a+x ./snyk-api-import
          mv ./snyk-api-import /usr/local/bin/
-         mkdir -p /var/log/snyk
-         chmod -R 777 /var/log/snyk
+         mkdir -p /usr/local/snyk/log
+         chmod -R 777 /usr/local/snyk/log
          
     - name: Run Snyk Import
       run: |
